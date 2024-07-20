@@ -6,9 +6,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export async function extractTextFromTXT(file: File): Promise<string> {
-  // TODO: Implement TXT text extraction
-
-  return "txt";
+  const text = await file.text();
+  return text;
 }
 
 export async function extractTextFromWord(file: File): Promise<string> {
