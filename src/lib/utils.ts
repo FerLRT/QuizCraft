@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import mammoth from "mammoth";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -11,9 +12,9 @@ export async function extractTextFromTXT(file: File): Promise<string> {
 }
 
 export async function extractTextFromWord(file: File): Promise<string> {
-  // TODO: Implement Word text extraction
-
-  return "word";
+  const arrayBuffer = await file.arrayBuffer();
+  const result = await mammoth.extractRawText({ arrayBuffer });
+  return result.value;
 }
 
 export async function extractTextFromPDF(file: File): Promise<string> {
