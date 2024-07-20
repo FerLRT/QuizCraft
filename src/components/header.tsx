@@ -4,7 +4,7 @@ export default function Header() {
       <a href="/" className="text-2xl font-bold">
         QuizApp
       </a>
-      <a href="/about">About</a>
+      <a href="/about">About Us</a>
     </header>
   );
 }

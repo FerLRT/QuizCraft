@@ -67,3 +67,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.active {
+  border: 2px solid white;
+}
