@@ -1,25 +1,4 @@
-const example = {
-  1: {
-    question: "Question 1",
-    answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
-  },
-  2: {
-    question: "Question 2",
-    answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
-  },
-  3: {
-    question: "Question 3",
-    answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
-  },
-  4: {
-    question: "Question 4",
-    answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
-  },
-  5: {
-    question: "Question 5",
-    answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
-  },
-};
+import { EXAMPLE } from "@/lib/constants";
 
 export default function Questions() {
   const pClass =
@@ -46,23 +25,27 @@ export default function Questions() {
   };
   return (
     <>
-      {Object.keys(example).map((item) => {
+      {Object.keys(EXAMPLE).map((key) => {
         return (
           <>
-            <h2 className="text-white text-2xl font-bold">
-              {example[item].question}
+            <h2 className="text-white text-2xl font-bold" id={`question${key}`}>
+              {EXAMPLE[key].question}
             </h2>
             <div
               className="text-white flex flex-col gap-10"
-              data-question={item}
+              data-question={key}
             >
-              {example[item].answers.map((answer) => {
+              {EXAMPLE[key].answers.map((answer) => {
                 return (
                   <p key={answer} className={pClass} onClick={handleOnCLick}>
                     {answer}
                   </p>
                 );
               })}
+              <p className="hidden">
+                The correct answer is:{" "}
+                {EXAMPLE[key].answers[EXAMPLE[key].correct]}
+              </p>
             </div>
           </>
         );
