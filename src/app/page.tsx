@@ -48,6 +48,7 @@ export default function Home() {
       <Input
         required
         type="file"
+        accept=".txt, .docx, .pdf"
         className="w-fit"
         onChange={handleFileChange}
       ></Input>
