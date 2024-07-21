@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import mammoth from "mammoth";
+import pdfToText from "react-pdftotext";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -18,9 +19,8 @@ export async function extractTextFromWord(file: File): Promise<string> {
 }
 
 export async function extractTextFromPDF(file: File): Promise<string> {
-  // TODO: Implement PDF text extraction
-
-  return "pdf";
+  const text = await pdfToText(file);
+  return text;
 }
 
 export function getFileExtension(file: File): string | undefined {
