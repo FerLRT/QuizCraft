@@ -68,6 +68,18 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .active {
   border: 2px solid white;
+}
+
+.correct {
+  border: 2px solid green;
+}
+
+.incorrect {
+  border: 2px solid red;
 }
