@@ -19,7 +19,7 @@ export default function Exam() {
         ) : (
           <Button
             onClick={() => setIsSubmit(true)}
-            className="hover:scale-125 transition duration-200 bg-neutral-950 mb-10"
+            className="hover:scale-125 hover:bg-neutral-950 hover:border-neutral-950 transition duration-200 bg-neutral-900 text-2xl border border-white mb-20"
           >
             Submit Answers!
           </Button>

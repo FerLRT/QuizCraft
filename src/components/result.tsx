@@ -1,7 +1,7 @@
 import { EXAMPLE } from "@/lib/constants";
 
 export default function Result() {
-  return <h2 className="text-white">Result: {getResult()}</h2>;
+  return <h2 className="text-white mb-20 text-2xl">Result: {getResult()}</h2>;
 }
 
 function getResult() {
