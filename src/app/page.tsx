@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { FileLoader } from "@/components/ui/fileLoader";
 import { Input } from "@/components/ui/input";
 import { extractText } from "@/lib/utils";
 import { useRouter } from "next/navigation";
@@ -8,10 +9,12 @@ import React, { FormEvent, useState } from "react";
 export default function Home() {
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
+  const [fileName, setFileName] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setFile(event.target.files[0]);
+      setFileName(event.target.files[0].name);
     }
   };
 
@@ -45,13 +48,9 @@ export default function Home() {
         placeholder="Write your API key..."
         className="w-fit"
       ></Input>
-      <Input
-        required
-        type="file"
-        accept=".txt, .docx, .pdf, .md, .odt"
-        className="w-fit"
-        onChange={handleFileChange}
-      ></Input>
+
+      <FileLoader onChange={handleFileChange} fileName={fileName} />
+
       <Button className="hover:scale-125 hover:bg-neutral-950 hover:border-neutral-950 transition duration-200 bg-neutral-900 text-2xl border border-white">
         Go to exam!
       </Button>

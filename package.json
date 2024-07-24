@@ -13,6 +13,8 @@
     "@xmldom/xmldom": "^0.8.10",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "flowbite": "^2.4.1",
+    "flowbite-react": "^0.10.1",
     "jszip": "^3.10.1",
     "lucide-react": "^0.411.0",
     "mammoth": "^1.8.0",
