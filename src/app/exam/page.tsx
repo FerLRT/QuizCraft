@@ -13,7 +13,7 @@ export default function Exam() {
       <Index></Index>
 
       <div className="flex flex-col gap-20 items-center mt-20">
-        <Questions></Questions>
+        <Questions isSubmit={isSubmit}></Questions>
         {isSubmit ? (
           <Result></Result>
         ) : (

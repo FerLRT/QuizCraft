@@ -1,9 +1,6 @@
 import { EXAMPLE } from "@/lib/constants";
 
-export default function Questions() {
-  const pClass =
-    "p-5 bg-neutral-950 w-96 cursor-pointer transition hover:scale-110 border-2 border-neutral-950";
-
+export default function Questions({ isSubmit }) {
   const handleOnCLick = (e) => {
     const target = e.target as HTMLElement;
     const parent = target.parentNode as HTMLElement & {
@@ -37,7 +34,11 @@ export default function Questions() {
             >
               {EXAMPLE[key].answers.map((answer) => {
                 return (
-                  <p key={answer} className={pClass} onClick={handleOnCLick}>
+                  <p
+                    key={answer}
+                    className={`p-5 bg-neutral-950 w-96 transition ${"cursor-pointer hover:scale-110"} border-2 border-neutral-950`}
+                    onClick={!isSubmit ? handleOnCLick : undefined}
+                  >
                     {answer}
                   </p>
                 );
