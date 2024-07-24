@@ -83,3 +83,7 @@ html {
 .incorrect {
   border: 2px solid red;
 }
+
+.active-bg {
+  background-color: red;
+}

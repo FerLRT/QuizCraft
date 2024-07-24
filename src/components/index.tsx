@@ -6,6 +6,7 @@ export default function Index() {
       {Object.keys(EXAMPLE).map((key) => {
         return (
           <a
+            data-index={key}
             href={`#question${key}`}
             key={key}
             className="p-3 border border-white m-1 hover:bg-neutral-900"
