@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { TEAM_MEMBERS } from "../../lib/constants";
 import { MdiLinkedin } from "../../components/assets/linkedInIcon";
 import { MdiGithub } from "../../components/assets/githubIcon";
@@ -16,8 +17,10 @@ export default function About() {
               key={member.name}
               className="bg-gray-800 p-6 rounded-lg flex flex-col"
             >
-              <img
-                className="w-32 h-32 rounded-full mx-auto mb-4"
+              <Image
+                className="rounded-full mx-auto mb-4"
+                width={150}
+                height={150}
                 src={member.imageUrl.src}
                 alt={`${member.name}'s photo`}
               />
@@ -52,8 +55,8 @@ export default function About() {
         <p>
           Over the past four years, we have participated in various hackathons,
           both together and individually, including the HPe CDS Tech Challenge,
-          Telefónica's HackForGood and Entrepreneur. These experiences have not
-          only honed our teamwork skills but also enhanced our technical
+          Telefónica&apos;s HackForGood and Entrepreneur. These experiences have
+          not only honed our teamwork skills but also enhanced our technical
           abilities, inspiring us to join this hackathon.
         </p>
         <p>
@@ -91,7 +94,7 @@ export default function About() {
         <p>
           This project stems from our own experiences as students. Having
           recently completed our degrees in Computer Engineering and about to
-          start a Master's in Strategic IT Management, we understand the
+          start a Master&apos;s in Strategic IT Management, we understand the
           challenges faced by both educators and students in the educational
           sphere. Our application is designed to address these challenges,
           offering a practical solution to enhance the learning and teaching
