@@ -1,4 +1,6 @@
-export const EXAMPLE = {
+import { Exam } from "@/interfaces/questionInterface";
+
+export const EXAMPLE: Exam = {
   1: {
     question: "Question 1",
     answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],

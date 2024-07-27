@@ -1,7 +1,14 @@
 import { EXAMPLE } from "@/lib/constants";
+import { Exam, Question } from "@/interfaces/questionInterface";
 
-export default function Questions({ results, isSubmit }) {
-  const handleOnCLick = (e) => {
+export default function Questions({
+  results,
+  isSubmit,
+}: {
+  results: string[];
+  isSubmit: boolean;
+}) {
+  const handleOnClick = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
     const parent = target.parentNode as HTMLElement & {
       dataQuestion?: string;
@@ -28,22 +35,22 @@ export default function Questions({ results, isSubmit }) {
         return (
           <>
             <h2 className="text-white text-2xl font-bold" id={`question${key}`}>
-              {EXAMPLE[key].question}
+              {EXAMPLE[key as keyof Exam].question}
             </h2>
             <div
               className="text-white flex flex-col gap-10"
               data-question={key}
             >
-              {EXAMPLE[key].answers.map((answer, index) => {
+              {EXAMPLE[key as keyof Exam].answers.map((answer, index) => {
                 return (
                   <p
                     key={answer}
-                    className={`answer p-5 bg-neutral-950 w-96 transition border-2 border-neutral-950  ${
+                    className={`answer p-5 bg-neutral-950 w-96 transition border-2 border-neutral-950 rounded-md  ${
                       isSubmit
                         ? results[answerCont++]
                         : "cursor-pointer hover:scale-110"
                     }`}
-                    onClick={!isSubmit ? handleOnCLick : undefined}
+                    onClick={!isSubmit ? handleOnClick : undefined}
                   >
                     {answer}
                   </p>

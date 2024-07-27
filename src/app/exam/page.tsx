@@ -2,18 +2,37 @@
 import Index from "@/components";
 import Questions from "@/components/questions";
 import Result from "@/components/result";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import MyButton from "@/components/myButton";
+import { useState, useEffect, useRef } from "react";
 import getMark from "@/lib/getMark";
+import formatTime from "@/lib/formatTime";
 
 export default function Exam() {
   const [isSubmit, setIsSubmit] = useState(false);
   const [results, setResults] = useState([]);
   const [mark, setMark] = useState(0);
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const timerRef = useRef<null | NodeJS.Timeout>(null);
 
-  const handleOnCLick = () => {
+  useEffect(() => {
+    // Init the timer when the page loads
+    timerRef.current = setInterval(() => {
+      setTimeElapsed((prevTime) => prevTime + 1);
+    }, 1000);
+
+    // Stop the timer when the component unmounts
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current as NodeJS.Timeout);
+      }
+    };
+  }, []);
+
+  const handleOnClick = () => {
     setIsSubmit(true);
     setMark(getMark(setResults));
+
+    clearInterval(timerRef.current!);
   };
 
   return (
@@ -23,14 +42,13 @@ export default function Exam() {
       <div className="flex flex-col gap-20 items-center mt-20">
         <Questions results={results} isSubmit={isSubmit}></Questions>
         {isSubmit ? (
-          <Result mark={mark}></Result>
+          <Result
+            mark={mark}
+            setIsSubmit={setIsSubmit}
+            time={formatTime(timeElapsed)}
+          ></Result>
         ) : (
-          <Button
-            onClick={handleOnCLick}
-            className="hover:scale-125 hover:bg-neutral-950 hover:border-neutral-950 transition duration-200 bg-neutral-900 text-2xl border border-white mb-20"
-          >
-            Submit Answers!
-          </Button>
+          <MyButton handleOnClick={handleOnClick}>Submit Answers!</MyButton>
         )}
       </div>
     </>
