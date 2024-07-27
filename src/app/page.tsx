@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import MyButton from "@/components/myButton";
 import { FileLoader } from "@/components/ui/fileLoader";
 import { Input } from "@/components/ui/input";
 import { extractText } from "@/lib/utils";
@@ -51,9 +51,7 @@ export default function Home() {
 
       <FileLoader onChange={handleFileChange} fileName={fileName} />
 
-      <Button className="hover:scale-125 hover:bg-neutral-950 hover:border-neutral-950 transition duration-200 bg-neutral-900 text-2xl border border-white">
-        Go to exam!
-      </Button>
+      <MyButton>Go to exam!</MyButton>
     </form>
   );
 }
