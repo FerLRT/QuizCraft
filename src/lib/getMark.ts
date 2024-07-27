@@ -1,8 +1,8 @@
 import { EXAMPLE } from "./constants";
 
-export default function getMark(setResults): number {
+export default function getMark(setResults: any): number {
   let mark = 0;
-  let results = [];
+  let results: string[] = [];
 
   Object.keys(EXAMPLE).forEach((key) => {
     const answers = document.querySelectorAll(
@@ -11,7 +11,7 @@ export default function getMark(setResults): number {
     const questionIndex = document.querySelector(`[data-index='${key}']`);
 
     answers.forEach((answer) => {
-      const index = EXAMPLE[key].answers.indexOf(answer.textContent);
+      const index = EXAMPLE[key].answers.indexOf(answer.textContent || "");
       if (answer.classList.contains("active")) {
         if (index === EXAMPLE[key].correct) {
           mark += 1;
