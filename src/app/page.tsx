@@ -4,12 +4,18 @@ import { FileLoader } from "@/components/ui/fileLoader";
 import { Input } from "@/components/ui/input";
 import { extractText } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, use, useState } from "react";
+import { generateTextWithPerplexity, makeTest} from "../lib/perplexity_utils";
+
 
 export default function Home() {
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
+
+  const [text, setText] = useState<string | null>(null);
+  const [key, setKey] = useState<string>("");
+
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -17,6 +23,10 @@ export default function Home() {
       setFileName(event.target.files[0].name);
     }
   };
+
+  const handleInPutChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setKey(event.target.value);
+  }
 
   const handleOnSubmit = async (
     e: FormEvent<HTMLFormElement>
@@ -27,14 +37,17 @@ export default function Home() {
       return;
     }
 
+    let extractedText = "";
     try {
-      const extractedText = await extractText(file);
-      console.log("Extracted Text:", extractedText);
+      extractedText = await extractText(file);
+      console.log(extractedText);
       router.push("/exam");
     } catch (error) {
       console.error("Error extracting text:", error);
       alert("Error extracting text");
     }
+    //const test = await makeTest(key, extractedText);
+    //console.log(test);
   };
 
   return (
@@ -47,6 +60,8 @@ export default function Home() {
         type="password"
         placeholder="Write your API key..."
         className="w-fit"
+        onChange={handleInPutChange}
+        value={key}
       ></Input>
 
       <FileLoader onChange={handleFileChange} fileName={fileName} />
