@@ -84,6 +84,6 @@ html {
   border: 2px solid red;
 }
 
-.active-bg {
-  background-color: red;
+.unchecked {
+  border: 2px solid blue;
 }
