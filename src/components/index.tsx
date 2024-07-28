@@ -1,20 +1,57 @@
+import { useState } from "react";
 import { EXAMPLE } from "@/lib/constants";
+import { BxsLeftArrow } from "./assets/leftIcon";
+import { BxsRightArrow } from "./assets/rightIcon";
 
 export default function Index() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Close the sidebar when a link is clicked in mobile view
+  const handleLinkClick = () => {
+    if (window.innerWidth < 768) {
+      setIsOpen(false);
+    }
+  };
+
   return (
-    <div className="fixed flex self-end mt-20 mr-10 text-white bg-neutral-950 p-3 rounded-md">
-      {Object.keys(EXAMPLE).map((key) => {
-        return (
-          <a
-            data-index={key}
-            href={`#question${key}`}
-            key={key}
-            className="index-number p-3 border border-white m-1 hover:bg-neutral-900 rounded-md"
+    <div>
+      <div
+        className={`fixed top-0 right-0 h-full lg:w-[20%] md:w-[60%] w-[80%] z-40 bg-neutral-950 text-white transition-transform ${
+          isOpen
+            ? "translate-x-0"
+            : "translate-x-full md:translate-x-[calc(100%-4rem)] lg:translate-x-[calc(100%-4rem)]"
+        }`}
+      >
+        <div className="w-full h-full">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="absolute left-[-3rem] top-5 p-2 bg-neutral-800 text-white rounded-md z-50"
           >
-            {key}
-          </a>
-        );
-      })}
+            {isOpen ? (
+              <BxsRightArrow className="h-6 w-6" />
+            ) : (
+              <BxsLeftArrow className="h-6 w-6" />
+            )}
+          </button>
+          <div className="flex flex-col w-full h-full overflow-y-auto overflow-x-hidden p-1 custom-scrollbar">
+            {Object.keys(EXAMPLE).map((key) => (
+              <a
+                data-index={key}
+                href={`#question${key}`}
+                key={key}
+                onClick={handleLinkClick}
+                className="index-number p-2 border border-white m-1 hover:bg-neutral-900 rounded-md flex justify-center items-center"
+                style={{
+                  wordBreak: "break-all",
+                  width: isOpen ? "100%" : "3rem",
+                }}
+              >
+                {isOpen ? `Question ${key}` : key}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
