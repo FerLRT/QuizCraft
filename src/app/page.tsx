@@ -4,18 +4,16 @@ import { FileLoader } from "@/components/ui/fileLoader";
 import { Input } from "@/components/ui/input";
 import { extractText } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import React, { FormEvent, use, useState } from "react";
-import { generateTextWithPerplexity, makeTest} from "../lib/perplexity_utils";
-
+import React, { FormEvent, useState } from "react";
+import { makeTest } from "../lib/perplexity_utils";
+import { useExam } from '@/context/ExamContext';
 
 export default function Home() {
   const router = useRouter();
+  const { setExam } = useExam();
   const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
-
-  const [text, setText] = useState<string | null>(null);
   const [key, setKey] = useState<string>("");
-
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -28,9 +26,7 @@ export default function Home() {
     setKey(event.target.value);
   }
 
-  const handleOnSubmit = async (
-    e: FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     if (!file) {
       alert("Please upload a file.");
@@ -40,19 +36,21 @@ export default function Home() {
     let extractedText = "";
     try {
       extractedText = await extractText(file);
-      router.push("/exam");
+      const test = await makeTest(key, extractedText);
+      if (test) {
+        setExam(test);
+        router.push("/exam");
+      } else {
+        alert("Failed to generate test");
+      }
     } catch (error) {
       console.error("Error extracting text:", error);
       alert("Error extracting text");
     }
-    const test = await makeTest(key, extractedText);
   };
 
   return (
-    <form
-      className="flex flex-col gap-20 items-center mt-40"
-      onSubmit={handleOnSubmit}
-    >
+    <form className="flex flex-col gap-20 items-center mt-40" onSubmit={handleOnSubmit}>
       <Input
         required
         type="password"

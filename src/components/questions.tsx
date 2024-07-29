@@ -1,10 +1,11 @@
-import { EXAMPLE } from "@/lib/constants";
-import { Exam, Question } from "@/interfaces/questionInterface";
+import { Exam } from "@/interfaces/questionInterface";
 
 export default function Questions({
+  exam,
   results,
   isSubmit,
 }: {
+  exam: Exam;
   results: string[];
   isSubmit: boolean;
 }) {
@@ -31,17 +32,17 @@ export default function Questions({
 
   return (
     <>
-      {Object.keys(EXAMPLE).map((key) => {
+      {Object.keys(exam).map((key) => {
         return (
-          <>
+          <div key={key}>
             <h2 className="text-white text-2xl font-bold" id={`question${key}`}>
-              {EXAMPLE[key as keyof Exam].question}
+              {exam[key].question}
             </h2>
             <div
               className="text-white flex flex-col gap-10"
               data-question={key}
             >
-              {EXAMPLE[key as keyof Exam].answers.map((answer, index) => {
+              {exam[key].answers.map((answer, index) => {
                 return (
                   <p
                     key={answer}
@@ -57,7 +58,7 @@ export default function Questions({
                 );
               })}
             </div>
-          </>
+          </div>
         );
       })}
     </>

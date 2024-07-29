@@ -6,15 +6,22 @@ import MyButton from "@/components/myButton";
 import { useState, useEffect, useRef } from "react";
 import getMark from "@/lib/getMark";
 import formatTime from "@/lib/formatTime";
+import { useExam } from '@/context/ExamContext';
 
 export default function Exam() {
+  const { exam } = useExam();
   const [isSubmit, setIsSubmit] = useState(false);
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<string[]>([]);
   const [mark, setMark] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const timerRef = useRef<null | NodeJS.Timeout>(null);
 
   useEffect(() => {
+    if (!exam) {
+      // Handle case where exam data is not available
+      console.error("No exam data found");
+      return;
+    }
     // Init the timer when the page loads
     timerRef.current = setInterval(() => {
       setTimeElapsed((prevTime) => prevTime + 1);
@@ -26,7 +33,7 @@ export default function Exam() {
         clearInterval(timerRef.current as NodeJS.Timeout);
       }
     };
-  }, []);
+  }, [exam]);
 
   const handleOnClick = () => {
     setIsSubmit(true);
@@ -35,12 +42,16 @@ export default function Exam() {
     clearInterval(timerRef.current!);
   };
 
+  if (!exam) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Index></Index>
 
       <div className="flex flex-col gap-20 items-center mt-20">
-        <Questions results={results} isSubmit={isSubmit}></Questions>
+        <Questions exam={exam} results={results} isSubmit={isSubmit}></Questions>
         {isSubmit ? (
           <Result
             mark={mark}

@@ -51,9 +51,10 @@ export async function makeTest(key: string, extractedText: string) {
         maxTokens: 1000,
         temperature: 0.3,
     });
-
+    console.log(text);
     const testLines = text.split('\n').filter(line => line.trim() !== '');
   const questions: { question: string; answers: string[]; correct: number; }[] = [];
+  console.log(testLines);
 
   for (let i = 0; i < testLines.length; i += 6) {
     const questionLine = testLines[i].split('. ')[1];
@@ -63,7 +64,7 @@ export async function makeTest(key: string, extractedText: string) {
       testLines[i + 3].split(') ')[1],
       testLines[i + 4].split(') ')[1],
     ];
-    const correct = parseInt(testLines[i + 5].split(': ')[1], 10);
+    const correct = parseInt(testLines[i + 5].split(': ')[1], 10)-1;
     questions.push({ question: questionLine, answers, correct });
   }
 
