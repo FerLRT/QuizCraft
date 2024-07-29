@@ -1,6 +1,17 @@
 import { createOpenAI } from "@ai-sdk/openai";
 import { generateText, generateObject } from "ai";
 import { z } from "zod";
+import { Exam, Question} from "../interfaces/questionInterface";
+
+const testSchema = z.object({
+    questions: z.array(
+        z.object({
+            question: z.string(),
+            answers: z.array(z.string()).length(4),
+            correct: z.number().min(0).max(3),
+        })
+    ).length(10),
+});
 
 export async function generateTextWithPerplexity(key: string) {
     console.log(key);
@@ -20,24 +31,56 @@ export async function generateTextWithPerplexity(key: string) {
     return text;
 };
 
-export async function makeTest(key: string, text: string) {
+export async function makeTest(key: string, extractedText: string) {
     const perplexity = createOpenAI({
         apiKey: key,
         baseURL: "https://api.perplexity.ai",
     });
 
     console.log("Making the test...");
-    const { object } = await generateObject({
+
+    const { text } = await generateText({
         model: perplexity("llama-3-sonar-large-32k-online"),
-        prompt: "Tell me a jocke", //+ "Dado que en este libro se trata el desarrollo de una aplicación web usando las tecnologías del   stack   o pila MERN, conviene describir cada una de estas, conforme a dicho acrónimo. MERN es una combinación de las siguientes cuatro tecnologías:   M ongoDB,  E xpress.js,   R eact.js y   N ode.js, de ahí sus iniciales. La unión de estas tecnologías (junto con otras librerías de soporte) permite desarrollar aplicaciones web   full-stack  usando JavaScript como lenguaje de base, tanto en el cliente como en el servidor.",
-        schema: z.object({
-            setup : z.string().describe("the setup of the joke"),
-            punchline: z.string().describe("the punchline of the joke"),
-        }),
+        prompt: `Generate me a test about the following content:\n${extractedText}\nin plain text with a maximum of 10 questions and 4 answers per question in the following format: 
+        Number. Question
+        1) Answer 1
+        2) Answer 2
+        3) Answer 3
+        4) Answer 4
+        Correct: 1`,
         maxTokens: 1000,
-        temperature: 0.75,
+        temperature: 0.3,
     });
 
-    console.log("This is the content of the response \n" + object);
-    return object;
+    const testLines = text.split('\n').filter(line => line.trim() !== '');
+  const questions: { question: string; answers: string[]; correct: number; }[] = [];
+
+  for (let i = 0; i < testLines.length; i += 6) {
+    const questionLine = testLines[i].split('. ')[1];
+    const answers = [
+      testLines[i + 1].split(') ')[1],
+      testLines[i + 2].split(') ')[1],
+      testLines[i + 3].split(') ')[1],
+      testLines[i + 4].split(') ')[1],
+    ];
+    const correct = parseInt(testLines[i + 5].split(': ')[1], 10);
+    questions.push({ question: questionLine, answers, correct });
+  }
+
+  const test = { questions };
+
+  try {
+    testSchema.parse(test);
+
+    const exam: Exam = {};
+    test.questions.forEach((q, index) => {
+      exam[`Question ${index + 1}`] = q;
+    });
+
+    console.log('Exam is valid:', exam);
+    return exam;
+  } catch (e) {
+    console.error('Test is invalid:', (e as Error).message);
+    return null;
+  }
 }

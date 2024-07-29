@@ -40,14 +40,12 @@ export default function Home() {
     let extractedText = "";
     try {
       extractedText = await extractText(file);
-      console.log(extractedText);
       router.push("/exam");
     } catch (error) {
       console.error("Error extracting text:", error);
       alert("Error extracting text");
     }
-    //const test = await makeTest(key, extractedText);
-    //console.log(test);
+    const test = await makeTest(key, extractedText);
   };
 
   return (
