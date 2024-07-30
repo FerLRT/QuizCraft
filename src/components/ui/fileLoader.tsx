@@ -72,12 +72,12 @@ export function FileLoader({
 
   return (
     <div
-      className={`flex w-[90%] items-center justify-center border-2 rounded-lg ${
+      className={`flex w-[90%] items-center justify-center border-2 rounded-lg bg-neutral-900 ${
         dragActive
           ? invalidFileType
             ? "border-red-600 bg-red-50"
             : "border-blue-900 bg-blue-50"
-          : "border-gray-300 bg-gray-50"
+          : "border-gray-400 bg-gray-50"
       }`}
       onDragEnter={handleDrag}
       onDragOver={handleDrag}

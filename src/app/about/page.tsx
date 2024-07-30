@@ -6,7 +6,7 @@ import { MdiGithub } from "../../components/assets/githubIcon";
 
 export default function About() {
   return (
-    <main className="bg-gray-900 text-white min-h-screen p-8">
+    <main className="text-white min-h-screen p-8 w-8/12 self-center flex flex-col gap-10">
       <h1 className="text-4xl font-bold mb-8">About Us</h1>
 
       <section className="mb-12">
@@ -15,7 +15,7 @@ export default function About() {
           {TEAM_MEMBERS.map((member) => (
             <div
               key={member.name}
-              className="bg-gray-800 p-6 rounded-lg flex flex-col"
+              className="border-t-2 border-b-2 p-6 shadow-xl flex flex-col "
             >
               <Image
                 className="rounded-full mx-auto mb-4"
@@ -26,17 +26,23 @@ export default function About() {
               />
               <h3 className="text-2xl font-bold mb-2">{member.name}</h3>
               <p className="text-xl mb-2">{member.role}</p>
-              <p>{member.description}</p>
+              <p className="mb-10">{member.description}</p>
               <div className="flex justify-center space-x-4 mt-auto mb-0 ">
                 <a
                   href={member.linkedIn}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="hover:scale-125 transition"
                 >
-                  <MdiLinkedin className="w-6 h-6" />
+                  <MdiLinkedin className="w-8 h-8" />
                 </a>
-                <a href={member.github} target="_blank">
-                  <MdiGithub className="w-6 h-6" />
+                <a
+                  href={member.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:scale-125 transition"
+                >
+                  <MdiGithub className="w-8 h-8" />
                 </a>
               </div>
             </div>
@@ -78,7 +84,7 @@ export default function About() {
           providing a tool that automates the generation of test questions.
         </p>
         <p>This application serves two main purposes:</p>
-        <ul className="list-disc list-inside ml-4 space-y-2">
+        <ul className="list-disc list-inside ml-4 mt-4 mb-4">
           <li>
             <strong>For Educators</strong>: It helps in automatically generating
             questions from their existing documents, saving valuable time in

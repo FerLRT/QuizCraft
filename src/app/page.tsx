@@ -6,7 +6,7 @@ import { extractText } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 import { makeTest } from "../lib/perplexity_utils";
-import { useExam } from '@/context/ExamContext';
+import { useExam } from "@/context/ExamContext";
 
 export default function Home() {
   const router = useRouter();
@@ -24,9 +24,11 @@ export default function Home() {
 
   const handleInPutChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setKey(event.target.value);
-  }
+  };
 
-  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleOnSubmit = async (
+    e: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     if (!file) {
       alert("Please upload a file.");
@@ -50,19 +52,30 @@ export default function Home() {
   };
 
   return (
-    <form className="flex flex-col gap-20 items-center mt-40" onSubmit={handleOnSubmit}>
-      <Input
-        required
-        type="password"
-        placeholder="Write your API key..."
-        className="w-fit"
-        onChange={handleInPutChange}
-        value={key}
-      ></Input>
+    <>
+      <form
+        className="flex flex-col gap-20 items-center mt-40"
+        onSubmit={handleOnSubmit}
+      >
+        <Input
+          required
+          type="password"
+          placeholder="Write your API key..."
+          className="w-[50%]"
+          onChange={handleInPutChange}
+          value={key}
+        ></Input>
 
-      <FileLoader onChange={handleFileChange} fileName={fileName} />
+        <FileLoader onChange={handleFileChange} fileName={fileName} />
 
-      <MyButton>Go to exam!</MyButton>
-    </form>
+        <MyButton>Go to exam!</MyButton>
+      </form>
+      <a
+        href="/about"
+        className="text-white self-center mt-auto mb-10 hover:underline"
+      >
+        Made with 🤍 by Lucian, Sergio and Fernando
+      </a>
+    </>
   );
 }

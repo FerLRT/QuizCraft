@@ -35,7 +35,10 @@ export default function Questions({
       {Object.keys(exam).map((key) => {
         return (
           <div key={key}>
-            <h2 className="text-white text-2xl font-bold" id={`question${key}`}>
+            <h2
+              className="text-white text-2xl font-bold mb-10"
+              id={`question${key}`}
+            >
               {exam[key].question}
             </h2>
             <div
@@ -46,7 +49,7 @@ export default function Questions({
                 return (
                   <p
                     key={answer}
-                    className={`answer p-5 bg-neutral-950 w-96 transition border-2 border-neutral-950 rounded-md  ${
+                    className={`answer p-5 bg-neutral-950 w-96 transition border-[3px] border-neutral-950 rounded-md  ${
                       isSubmit
                         ? results[answerCont++]
                         : "cursor-pointer hover:scale-110"

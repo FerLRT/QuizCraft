@@ -73,19 +73,19 @@ html {
 }
 
 .active {
-  border: 2px solid white;
+  border: 3px solid white;
 }
 
 .correct {
-  border: 2px solid green;
+  border: 3px solid rgb(29, 185, 94);
 }
 
 .incorrect {
-  border: 2px solid red;
+  border: 3px solid rgb(185, 29, 29);
 }
 
 .unchecked {
-  border: 2px solid blue;
+  border: 3px solid rgb(214, 140, 37);
 }
 
 .custom-scrollbar {
