@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { extractText } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
-import { makeTest } from "../lib/perplexity_utils";
+import { makeTest, generateTestWithOpenAI } from "../lib/perplexity_utils";
 import { useExam } from "@/context/ExamContext";
 
 export default function Home() {
@@ -38,7 +38,7 @@ export default function Home() {
     let extractedText = "";
     try {
       extractedText = await extractText(file);
-      const test = await makeTest(key, extractedText);
+      const test = await generateTestWithOpenAI(key, extractedText);
       if (test) {
         setExam(test);
         router.push("/exam");
