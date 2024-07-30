@@ -18,6 +18,9 @@ export default function Exam() {
   const [mark, setMark] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const timerRef = useRef<null | NodeJS.Timeout>(null);
+  const [answeredQuestions, setAnsweredQuestions] = useState<Set<string>>(
+    new Set()
+  );
 
   useMark(isSubmit, mark);
   useEffect(() => {
@@ -54,12 +57,13 @@ export default function Exam() {
 
   return (
     <>
-      <Index></Index>
+      <Index answeredQuestions={answeredQuestions}></Index>
       <div className="flex flex-col gap-20 items-center mt-20 mb-20 mr-[10%] ml-[10%]">
         <Questions
           exam={exam}
           results={results}
           isSubmit={isSubmit}
+          setAnsweredQuestions={setAnsweredQuestions}
         ></Questions>
         {isSubmit ? (
           <Result

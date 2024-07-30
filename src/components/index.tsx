@@ -3,7 +3,11 @@ import { EXAMPLE } from "@/lib/constants";
 import { BxsLeftArrow } from "./assets/leftIcon";
 import { BxsRightArrow } from "./assets/rightIcon";
 
-export default function Index() {
+export default function Index({
+  answeredQuestions,
+}: {
+  answeredQuestions: Set<string>;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   // Close the sidebar when a link is clicked in mobile view
@@ -40,7 +44,11 @@ export default function Index() {
                 href={`#question${key}`}
                 key={key}
                 onClick={handleLinkClick}
-                className="index-number p-2 border border-white m-1 hover:bg-neutral-900 rounded-md flex justify-center items-center"
+                className={`index-number p-2 border m-1 rounded-md flex justify-center items-center ${
+                  answeredQuestions.has(key)
+                    ? "border-blue-500"
+                    : "bg-white-500"
+                } hover:bg-neutral-900`}
                 style={{
                   wordBreak: "break-all",
                   width: isOpen ? "100%" : "3rem",
