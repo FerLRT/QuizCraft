@@ -55,7 +55,7 @@ export default function Exam() {
   return (
     <>
       <Index></Index>
-      <div className="flex flex-col gap-20 items-center mt-20 mb-20">
+      <div className="flex flex-col gap-20 items-center mt-20 mb-20 mr-[10%] ml-[10%]">
         <Questions
           exam={exam}
           results={results}

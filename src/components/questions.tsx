@@ -9,6 +9,8 @@ export default function Questions({
   results: string[];
   isSubmit: boolean;
 }) {
+  let answerCont = 0;
+
   const handleOnClick = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
     const parent = target.parentNode as HTMLElement & {
@@ -28,7 +30,6 @@ export default function Questions({
       target.classList.add("active");
     }
   };
-  let answerCont = 0;
 
   return (
     <>
@@ -36,20 +37,20 @@ export default function Questions({
         return (
           <div key={key}>
             <h2
-              className="text-white text-2xl font-bold mb-10"
+              className="text-white text-2xl font-bold mb-10 w-[100%] max-w-[500px]"
               id={`question${key}`}
             >
-              {exam[key].question}
+              {key}. {exam[key].question}
             </h2>
             <div
-              className="text-white flex flex-col gap-10"
+              className="text-white flex flex-col gap-10 justify-center items-center"
               data-question={key}
             >
-              {exam[key].answers.map((answer, index) => {
+              {exam[key].answers.map((answer) => {
                 return (
                   <p
                     key={answer}
-                    className={`answer p-5 bg-neutral-950 w-96 transition border-[3px] border-neutral-950 rounded-md  ${
+                    className={`answer p-5 bg-neutral-950 w-[100%] max-w-96 transition border-[3px] border-neutral-950 rounded-md  ${
                       isSubmit
                         ? results[answerCont++]
                         : "cursor-pointer hover:scale-110"
