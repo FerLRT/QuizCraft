@@ -52,30 +52,30 @@ export default function Home() {
   };
 
   return (
-    <>
-      <form
-        className="flex flex-col gap-20 items-center mt-40"
-        onSubmit={handleOnSubmit}
-      >
-        <Input
-          required
-          type="password"
-          placeholder="Write your API key..."
-          className="w-[50%]"
-          onChange={handleInPutChange}
-          value={key}
-        ></Input>
-
-        <FileLoader onChange={handleFileChange} fileName={fileName} />
-
-        <MyButton>Go to exam!</MyButton>
-      </form>
+    <div className="flex flex-col flex-grow justify-center align-center">
+      <div className="flex-grow flex justify-center items-center p-10">
+        <form
+          className="flex flex-col gap-10 items-center w-full max-w-lg"
+          onSubmit={handleOnSubmit}
+        >
+          <Input
+            required
+            type="password"
+            placeholder="Write your API key..."
+            className="w-full max-w-sm"
+            onChange={handleInPutChange}
+            value={key}
+          />
+          <FileLoader onChange={handleFileChange} fileName={fileName} />
+          <MyButton>Go to exam!</MyButton>
+        </form>
+      </div>
       <a
         href="/about"
-        className="text-white self-center mt-auto mb-10 hover:underline"
+        className="flex justify-center text-white text-center mb-4 hover:underline"
       >
         Made with 🤍 by Lucian, Sergio and Fernando
       </a>
-    </>
+    </div>
   );
 }
