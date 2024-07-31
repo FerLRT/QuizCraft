@@ -7,10 +7,12 @@ export default function Result({
   mark,
   setIsSubmit,
   time,
+  setAnsweredQuestions,
 }: {
   mark: number;
   setIsSubmit: Dispatch<SetStateAction<boolean>>;
   time: string;
+  setAnsweredQuestions: Dispatch<SetStateAction<Set<string>>>;
 }) {
   const handleOnClickReview = () => {
     window.scrollTo({ top: 0 });
@@ -28,6 +30,7 @@ export default function Result({
     });
 
     setIsSubmit(false);
+    setAnsweredQuestions(new Set());
     window.scrollTo({ top: 0 });
   };
 

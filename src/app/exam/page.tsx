@@ -70,6 +70,7 @@ export default function Exam() {
             mark={mark}
             setIsSubmit={setIsSubmit}
             time={formatTime(timeElapsed)}
+            setAnsweredQuestions={setAnsweredQuestions}
           ></Result>
         ) : (
           <MyButton handleOnClick={handleOnClick}>Submit Answers!</MyButton>

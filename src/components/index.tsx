@@ -46,8 +46,8 @@ export default function Index({
                 onClick={handleLinkClick}
                 className={`index-number p-2 border m-1 rounded-md flex justify-center items-center ${
                   answeredQuestions.has(key)
-                    ? "border-blue-500"
-                    : "bg-white-500"
+                    ? "border-2 border-blue-500"
+                    : "border-2 bg-white-500"
                 } hover:bg-neutral-900`}
                 style={{
                   wordBreak: "break-all",
