@@ -2,6 +2,7 @@ import { useState } from "react";
 import { EXAMPLE } from "@/lib/constants";
 import { BxsLeftArrow } from "./assets/leftIcon";
 import { BxsRightArrow } from "./assets/rightIcon";
+import { HomeIcon } from "./icons/icons";
 
 export default function Index({
   answeredQuestions,
@@ -57,6 +58,16 @@ export default function Index({
                 {isOpen ? `Question ${key}` : key}
               </a>
             ))}
+            <a
+              href="/"
+              className="p-2 border-2 m-1 mt-auto rounded-md flex justify-center items-center hover:bg-neutral-900"
+              style={{
+                wordBreak: "break-all",
+                width: isOpen ? "100%" : "3rem",
+              }}
+            >
+              <HomeIcon></HomeIcon> {isOpen ? " Homepage" : ""}
+            </a>
           </div>
         </div>
       </div>

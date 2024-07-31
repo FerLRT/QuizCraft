@@ -2,6 +2,7 @@ import { EXAMPLE } from "@/lib/constants";
 import MyButton from "./myButton";
 import { Dispatch, SetStateAction } from "react";
 import removeColors from "@/lib/removeColors";
+import { ResetIcon } from "./icons/icons";
 
 export default function Result({
   mark,
@@ -45,13 +46,17 @@ export default function Result({
         <p>Incorrects: {Object.keys(EXAMPLE).length - mark}</p>
         <p>Time: {time}</p>
       </section>
-      <section className="flex gap-10 items-center">
+      <section className="flex gap-10">
         <MyButton handleOnClick={handleOnClickReview}>Review Answers</MyButton>
         <p className="text-2xl">or</p>
         <MyButton handleOnClick={handleOnClickTryAgain}>Try Again</MyButton>
       </section>
-      <a href="/" className="text-2xl hover:underline">
-        Go homepage
+      <a
+        href="/"
+        className="flex flex-col items-center text-2xl transition hover:scale-125 duration-200 w-fit self-center col-start-2"
+      >
+        <ResetIcon></ResetIcon>
+        <p>New test</p>
       </a>
     </div>
   );

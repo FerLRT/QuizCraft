@@ -72,7 +72,7 @@ export function FileLoader({
 
   return (
     <div
-      className={`flex w-[90%] items-center justify-center border-2 rounded-lg bg-neutral-900 ${
+      className={`flex w-full items-center justify-center border-2 rounded-lg bg-neutral-900 ${
         dragActive
           ? invalidFileType
             ? "border-red-600 bg-red-50"
