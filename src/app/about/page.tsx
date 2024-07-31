@@ -6,7 +6,7 @@ import { MdiGithub } from "../../components/assets/githubIcon";
 
 export default function About() {
   return (
-    <main className="text-white min-h-screen p-8 w-8/12 self-center flex flex-col gap-10">
+    <main className="text-white min-h-screen p-8 md:w-10/12 lg:w-8/12 self-center flex flex-col gap-10">
       <h1 className="text-4xl font-bold mb-8">About Us</h1>
 
       <section className="mb-12">
