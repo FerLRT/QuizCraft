@@ -50,7 +50,7 @@ export default function Questions({
         return (
           <div key={key}>
             <h2
-              className="text-white text-2xl font-bold mb-10 w-[100%] max-w-[500px]"
+              className="text-white text-2xl font-bold mb-10 w-[100%] max-w-[650px]"
               id={`question${key}`}
             >
               {key}. {exam[key].question}
