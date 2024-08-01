@@ -108,3 +108,13 @@ html {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: #555;
 }
+
+.bg-diagonal-gradient {
+  background: linear-gradient(45deg, #383838, #0b0b0b);
+  height: 100%;
+  width: 100%;
+}
+
+.bg-diagonal-gradient-inverted {
+  background: linear-gradient(-45deg, #383838, #0b0b0b);
+}
