@@ -54,7 +54,6 @@ export default function Home() {
   return (
     <div className="flex flex-col flex-grow align-center">
       <div className="flex-grow flex flex-col gap-20 justify-center items-center p-10">
-        <h1 className="text-5xl font-bold text-white text-center">QuizAI</h1>
         <form
           className="flex flex-col gap-10 items-center w-full max-w-lg"
           onSubmit={handleOnSubmit}
