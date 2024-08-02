@@ -58,14 +58,20 @@ export default function Home() {
           className="flex flex-col gap-10 items-center w-full max-w-lg"
           onSubmit={handleOnSubmit}
         >
-          <Input
-            required
-            type="password"
-            placeholder="Write your API key..."
-            className="w-full"
-            onChange={handleInPutChange}
-            value={key}
-          />
+          <section className="flex gap-5 w-full">
+            <Input
+              required
+              type="password"
+              placeholder="Write your API key..."
+              className="w-[70%]"
+              onChange={handleInPutChange}
+              value={key}
+            />
+
+            <select className="w-[30%] rounded-md">
+              <option>gpt-4-turbo</option>
+            </select>
+          </section>
           <FileLoader onChange={handleFileChange} fileName={fileName} />
           <MyButton>Go to exam!</MyButton>
         </form>

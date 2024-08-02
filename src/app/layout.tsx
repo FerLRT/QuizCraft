@@ -8,8 +8,8 @@ import { Header } from "@/components/header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "QuizAI",
-  description: "QuizAI",
+  title: "QuizCraft",
+  description: "QuizCraft",
 };
 
 export default function RootLayout({
