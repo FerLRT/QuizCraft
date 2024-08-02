@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 import { generateTest } from "../lib/ia_utils";
 import { useExam } from "@/context/ExamContext";
+import { Loader } from "../components/assets/loader";
 
 export default function Home() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function Home() {
   const [fileName, setFileName] = useState<string | null>(null);
   const [key, setKey] = useState<string>("");
   const [selectedModel, setSelectedModel] = useState<string>("gpt-4-turbo");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -40,9 +42,9 @@ export default function Home() {
       return;
     }
 
-    let extractedText = "";
+    setLoading(true);
     try {
-      extractedText = await extractText(file);
+      const extractedText = await extractText(file);
       const test = await generateTest(key, extractedText, selectedModel);
       if (test) {
         setExam(test);
@@ -53,6 +55,8 @@ export default function Home() {
     } catch (error) {
       console.error("Error extracting text:", error);
       alert("Error extracting text");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -83,7 +87,19 @@ export default function Home() {
             </select>
           </section>
           <FileLoader onChange={handleFileChange} fileName={fileName} />
-          <MyButton>Go to exam!</MyButton>
+
+          <div className="w-48 h-24 flex items-center justify-center">
+            {loading ? (
+              <section className="flex flex-col gap-2 items-center">
+                <Loader className="w-8 h-8" />
+                <span className="text-white text-center mt-2">
+                  Wait while the test is generated...
+                </span>
+              </section>
+            ) : (
+              <MyButton>Go to exam!</MyButton>
+            )}
+          </div>
         </form>
       </div>
       <a
