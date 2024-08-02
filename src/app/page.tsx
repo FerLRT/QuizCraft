@@ -58,7 +58,7 @@ export default function Home() {
           className="flex flex-col gap-10 items-center w-full max-w-lg"
           onSubmit={handleOnSubmit}
         >
-          <section className="flex gap-5 w-full">
+          <section className="flex gap-2 w-full">
             <Input
               required
               type="password"

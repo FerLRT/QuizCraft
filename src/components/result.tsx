@@ -36,7 +36,7 @@ export default function Result({
   };
 
   return (
-    <div className="flex flex-col gap-24 mt-20 h-[100vh] justify-center text-white">
+    <div className="flex flex-col gap-24 mt-20 pb-10 h-[100vh] justify-center text-white">
       <h2 id="mark" className="text-5xl border-b-2 p-5">
         Results
       </h2>
@@ -46,7 +46,7 @@ export default function Result({
         <p>Incorrects: {Object.keys(EXAMPLE).length - mark}</p>
         <p>Time: {time}</p>
       </section>
-      <section className="flex gap-10">
+      <section className="flex flex-col md:flex-row gap-10 text-center">
         <MyButton handleOnClick={handleOnClickReview}>Review Answers</MyButton>
         <p className="text-2xl">or</p>
         <MyButton handleOnClick={handleOnClickTryAgain}>Try Again</MyButton>
