@@ -68,7 +68,7 @@ export default function Home() {
               value={key}
             />
 
-            <select className="w-[30%] rounded-md">
+            <select className="w-[30%] rounded-md bg-background">
               <option>gpt-4-turbo</option>
             </select>
           </section>

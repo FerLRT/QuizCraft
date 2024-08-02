@@ -21,7 +21,7 @@ export default function Index({
   return (
     <div>
       <div
-        className={`fixed top-0 right-0 h-full lg:w-[20%] md:w-[60%] w-[80%] z-40 bg-neutral-950 text-white transition-transform ${
+        className={`fixed top-0 right-0 h-full lg:w-[20%] md:w-[60%] w-[80%] z-40 bg-transparent text-white transition-transform ${
           isOpen
             ? "translate-x-0"
             : "translate-x-full md:translate-x-[calc(100%-4rem)] lg:translate-x-[calc(100%-4rem)]"
@@ -30,7 +30,7 @@ export default function Index({
         <div className="w-full h-full">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="absolute left-[-3rem] top-5 p-2 bg-neutral-800 text-white rounded-md z-50"
+            className="absolute left-[-3rem] top-5 p-2 bg-transparent text-white rounded-md z-50"
           >
             {isOpen ? (
               <BxsRightArrow className="h-6 w-6" />
@@ -45,11 +45,11 @@ export default function Index({
                 href={`#question${key}`}
                 key={key}
                 onClick={handleLinkClick}
-                className={`index-number p-2 border m-1 rounded-md flex justify-center items-center ${
+                className={`index-number p-2 border m-1 rounded-md flex justify-center items-center bg-neutral-900 ${
                   answeredQuestions.has(key)
                     ? "border-2 border-blue-500"
                     : "border-2 bg-white-500"
-                } hover:bg-neutral-900`}
+                } hover:bg-neutral-700`}
                 style={{
                   wordBreak: "break-all",
                   width: isOpen ? "100%" : "3rem",
@@ -60,13 +60,9 @@ export default function Index({
             ))}
             <a
               href="/"
-              className="p-2 border-2 m-1 mt-auto rounded-md flex justify-center items-center hover:bg-neutral-900"
-              style={{
-                wordBreak: "break-all",
-                width: isOpen ? "100%" : "3rem",
-              }}
+              className="p-2 m-1 mt-auto rounded-md flex justify-center items-center duration-200 hover:scale-125 w-fit transition duration-200 text-center"
             >
-              <HomeIcon></HomeIcon> {isOpen ? " Homepage" : ""}
+              <HomeIcon></HomeIcon>
             </a>
           </div>
         </div>

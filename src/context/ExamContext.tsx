@@ -11,7 +11,7 @@ interface ExamContextType {
 const ExamContext = createContext<ExamContextType | undefined>(undefined);
 
 export const ExamProvider = ({ children }: { children: ReactNode }) => {
-  const [exam, setExam] = useState<Exam | null>(EXAMPLE);
+  const [exam, setExam] = useState<Exam | null>(null);
 
   return (
     <ExamContext.Provider value={{ exam, setExam }}>
