@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { extractText } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
-import { makeTest, generateTestWithOpenAI } from "../lib/perplexity_utils";
+import { generateTest } from "../lib/ia_utils";
 import { useExam } from "@/context/ExamContext";
 
 export default function Home() {
@@ -14,6 +14,7 @@ export default function Home() {
   const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
   const [key, setKey] = useState<string>("");
+  const [selectedModel, setSelectedModel] = useState<string>("gpt-4-turbo");
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -24,6 +25,10 @@ export default function Home() {
 
   const handleInPutChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setKey(event.target.value);
+  };
+
+  const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedModel(event.target.value);
   };
 
   const handleOnSubmit = async (
@@ -38,7 +43,7 @@ export default function Home() {
     let extractedText = "";
     try {
       extractedText = await extractText(file);
-      const test = await generateTestWithOpenAI(key, extractedText);
+      const test = await generateTest(key, extractedText, selectedModel);
       if (test) {
         setExam(test);
         router.push("/exam");
@@ -68,8 +73,13 @@ export default function Home() {
               value={key}
             />
 
-            <select className="w-[30%] rounded-md bg-background">
-              <option>gpt-4-turbo</option>
+            <select
+              className="w-[30%] rounded-md"
+              onChange={handleOptionChange}
+              value={selectedModel}
+            >
+              <option value="gpt-4-turbo">gpt-4-turbo</option>
+              <option value="gemma2-9b-it">groq-gemma2-9b-it</option>
             </select>
           </section>
           <FileLoader onChange={handleFileChange} fileName={fileName} />
