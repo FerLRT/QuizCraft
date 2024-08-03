@@ -3,13 +3,16 @@ import MyButton from "./myButton";
 import { Dispatch, SetStateAction } from "react";
 import removeColors from "@/lib/removeColors";
 import { ResetIcon } from "./icons/icons";
+import { Exam } from "@/interfaces/questionInterface";
 
 export default function Result({
+  exam,
   mark,
   setIsSubmit,
   time,
   setAnsweredQuestions,
 }: {
+  exam: Exam;
   mark: number;
   setIsSubmit: Dispatch<SetStateAction<boolean>>;
   time: string;
@@ -41,9 +44,9 @@ export default function Result({
         Results
       </h2>
       <section className="text-3xl flex flex-col gap-10 border-l-2 pl-5">
-        <p>Final Mark: {(mark / Object.keys(EXAMPLE).length) * 10} / 10</p>
+        <p>Final Mark: {(mark / Object.keys(exam).length) * 10} / 10</p>
         <p>Corrects: {mark}</p>
-        <p>Incorrects: {Object.keys(EXAMPLE).length - mark}</p>
+        <p>Incorrects: {Object.keys(exam).length - mark}</p>
         <p>Time: {time}</p>
       </section>
       <section className="flex flex-col md:flex-row gap-10 text-center">

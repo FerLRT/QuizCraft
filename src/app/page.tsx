@@ -83,7 +83,6 @@ export default function Home() {
               value={selectedModel}
             >
               <option value="gpt-4-turbo">gpt-4-turbo</option>
-              <option value="gemma2-9b-it">groq-gemma2-9b-it</option>
             </select>
           </section>
           <FileLoader onChange={handleFileChange} fileName={fileName} />

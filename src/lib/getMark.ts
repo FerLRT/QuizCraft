@@ -1,19 +1,19 @@
-import { EXAMPLE } from "./constants";
+import { Exam } from "@/interfaces/questionInterface";
 
-export default function getMark(setResults: any): number {
+export default function getMark(setResults: any, exam: Exam): number {
   let mark = 0;
   let results: string[] = [];
 
-  Object.keys(EXAMPLE).forEach((key) => {
+  Object.keys(exam).forEach((key) => {
     const answers = document.querySelectorAll(
       `[data-question='${key}'] .answer`
     );
     const questionIndex = document.querySelector(`[data-index='${key}']`);
 
     answers.forEach((answer) => {
-      const index = EXAMPLE[key].answers.indexOf(answer.textContent || "");
+      const index = exam[key].answers.indexOf(answer.textContent || "");
       if (answer.classList.contains("active")) {
-        if (index === EXAMPLE[key].correct) {
+        if (index === exam[key].correct) {
           mark += 1;
           questionIndex?.classList.add("correct");
           results.push("correct");
@@ -22,7 +22,7 @@ export default function getMark(setResults: any): number {
           results.push("incorrect");
         }
       } else {
-        index === EXAMPLE[key].correct
+        index === exam[key].correct
           ? results.push("unchecked")
           : results.push("");
       }

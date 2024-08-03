@@ -41,8 +41,11 @@ export default function Exam() {
   }, [exam]);
 
   const handleOnClick = () => {
+    if (!exam) {
+      return;
+    }
     setIsSubmit(true);
-    setMark(getMark(setResults));
+    setMark(getMark(setResults, exam));
     clearInterval(timerRef.current!);
 
     const mark = document.getElementById("mark");
@@ -65,6 +68,7 @@ export default function Exam() {
         ></Questions>
         {isSubmit ? (
           <Result
+            exam={exam}
             mark={mark}
             setIsSubmit={setIsSubmit}
             time={formatTime(timeElapsed)}
