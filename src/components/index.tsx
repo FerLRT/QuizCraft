@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { EXAMPLE } from "@/lib/constants";
 import { BxsLeftArrow } from "./assets/leftIcon";
 import { BxsRightArrow } from "./assets/rightIcon";
 import { HomeIcon } from "./icons/icons";
+import { Exam } from "@/interfaces/questionInterface";
 
 export default function Index({
+  exam,
   answeredQuestions,
 }: {
+  exam: Exam;
   answeredQuestions: Set<string>;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +41,7 @@ export default function Index({
             )}
           </button>
           <div className="flex flex-col w-full h-full overflow-y-auto overflow-x-hidden p-1 custom-scrollbar">
-            {Object.keys(EXAMPLE).map((key) => (
+            {Object.keys(exam).map((key) => (
               <a
                 data-index={key}
                 href={`#question${key}`}

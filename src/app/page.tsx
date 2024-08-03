@@ -78,7 +78,7 @@ export default function Home() {
             />
 
             <select
-              className="w-[30%] rounded-md"
+              className="w-[30%] rounded-md cursor-pointer"
               onChange={handleOptionChange}
               value={selectedModel}
             >

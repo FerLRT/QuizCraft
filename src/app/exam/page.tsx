@@ -7,8 +7,6 @@ import { useState, useEffect, useRef } from "react";
 import getMark from "@/lib/getMark";
 import formatTime from "@/lib/formatTime";
 import { useExam } from "@/context/ExamContext";
-import { EXAMPLE } from "@/lib/constants";
-import { redirect } from "next/dist/server/api-utils";
 import useMark from "../hooks/useMark";
 
 export default function Exam() {
@@ -57,7 +55,7 @@ export default function Exam() {
 
   return (
     <>
-      <Index answeredQuestions={answeredQuestions}></Index>
+      <Index exam={exam} answeredQuestions={answeredQuestions}></Index>
       <div className="flex flex-col gap-20 items-center mt-20 mb-20 mr-[10%] ml-[10%]">
         <Questions
           exam={exam}
