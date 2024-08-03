@@ -44,6 +44,14 @@ async function validateTest(test: any) {
     }
 }
 
+function shuffleArray(array: any[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 export async function generateTest(key: string, extractedText: string, modelOption: string) {
     const model = modelElection(modelOption);
     const openai = createOpenAI({
@@ -62,6 +70,12 @@ export async function generateTest(key: string, extractedText: string, modelOpti
     });
 
     const test = response.object;
+
+    test.questions.forEach((q: any) => {
+        const correctAnswer = q.answers[q.correct];
+        q.answers = shuffleArray(q.answers);
+        q.correct = q.answers.indexOf(correctAnswer);
+    });
 
     return await validateTest(test);
 
