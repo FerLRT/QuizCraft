@@ -1,16 +1,16 @@
 import { Exam } from "@/interfaces/questionInterface";
+import { useExam } from "@/context/ExamContext";
 
 export default function Questions({
-  exam,
   results,
   isSubmit,
   setAnsweredQuestions,
 }: {
-  exam: Exam;
   results: string[];
   isSubmit: boolean;
   setAnsweredQuestions: React.Dispatch<React.SetStateAction<Set<string>>>;
 }) {
+  const { exam } = useExam();
   let answerCont = 0;
 
   const handleOnClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -43,6 +43,8 @@ export default function Questions({
       );
     }
   };
+
+  if (!exam) return null;
 
   return (
     <>

@@ -1,4 +1,5 @@
 "use client";
+
 import Index from "@/components";
 import Questions from "@/components/questions";
 import Result from "@/components/result";
@@ -27,6 +28,7 @@ export default function Exam() {
       console.error("No exam data found");
       return;
     }
+
     // Init the timer when the page loads
     timerRef.current = setInterval(() => {
       setTimeElapsed((prevTime) => prevTime + 1);
@@ -65,14 +67,12 @@ export default function Exam() {
         </h2>
 
         <Questions
-          exam={exam}
           results={results}
           isSubmit={isSubmit}
           setAnsweredQuestions={setAnsweredQuestions}
         ></Questions>
         {isSubmit ? (
           <Result
-            exam={exam}
             mark={mark}
             setIsSubmit={setIsSubmit}
             time={formatTime(timeElapsed)}

@@ -11,3 +11,7 @@ export interface Question {
   correct: number;
   explanation: string;
 }
+
+export interface ExamsDictionary {
+  [key: string]: Exam;
+}

@@ -1,14 +1,15 @@
 "use client";
+
 import MyButton from "@/components/myButton";
 import { FileLoader } from "@/components/ui/fileLoader";
 import { Input } from "@/components/ui/input";
 import { extractText } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { generateTest } from "../lib/ia_utils";
 import { useExam } from "@/context/ExamContext";
 import { Loader } from "../components/assets/loader";
-import { saveExamToLocalStorage } from "../lib/saveExam";
+import { useLocalStorage } from "../lib/examLocalStorage";
 
 export default function Home() {
   const router = useRouter();
@@ -18,6 +19,16 @@ export default function Home() {
   const [key, setKey] = useState<string>("");
   const [selectedModel, setSelectedModel] = useState<string>("gpt-4-turbo");
   const [loading, setLoading] = useState<boolean>(false);
+
+  const { addExam } = useLocalStorage();
+
+  useEffect(() => {
+    const key = localStorage.getItem("key");
+
+    if (key) {
+      setKey(key);
+    }
+  }, []);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -49,7 +60,7 @@ export default function Home() {
       const test = await generateTest(key, extractedText, selectedModel);
       if (test) {
         setExam(test);
-        saveExamToLocalStorage(test);
+        addExam(test);
         router.push("/exam");
       } else {
         alert("Failed to generate test");

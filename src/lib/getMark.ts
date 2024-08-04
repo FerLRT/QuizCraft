@@ -4,7 +4,7 @@ export default function getMark(setResults: any, exam: Exam): number {
   let mark = 0;
   let results: string[] = [];
 
-  Object.keys(exam).forEach((key) => {
+  Object.keys(exam.questions).forEach((key) => {
     const answers = document.querySelectorAll(
       `[data-question='${key}'] .answer`
     );

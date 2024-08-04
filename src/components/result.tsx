@@ -2,21 +2,21 @@ import MyButton from "./myButton";
 import { Dispatch, SetStateAction } from "react";
 import removeColors from "@/lib/removeColors";
 import { ResetIcon } from "./icons/icons";
-import { Exam } from "@/interfaces/questionInterface";
+import { useExam } from "@/context/ExamContext";
 
 export default function Result({
-  exam,
   mark,
   setIsSubmit,
   time,
   setAnsweredQuestions,
 }: {
-  exam: Exam;
   mark: number;
   setIsSubmit: Dispatch<SetStateAction<boolean>>;
   time: string;
   setAnsweredQuestions: Dispatch<SetStateAction<Set<string>>>;
 }) {
+  const { exam } = useExam();
+
   const handleOnClickReview = () => {
     window.scrollTo({ top: 0 });
   };
@@ -37,15 +37,19 @@ export default function Result({
     window.scrollTo({ top: 0 });
   };
 
+  if (!exam) return null;
+
   return (
     <div className="flex flex-col gap-24 mt-20 pb-10 h-[100vh] justify-center text-white">
       <h2 id="mark" className="text-5xl border-b-2 p-5">
         Results
       </h2>
       <section className="text-3xl flex flex-col gap-10 border-l-2 pl-5">
-        <p>Final Mark: {(mark / Object.keys(exam).length) * 10} / 10</p>
+        <p>
+          Final Mark: {(mark / Object.keys(exam.questions).length) * 10} / 10
+        </p>
         <p>Corrects: {mark}</p>
-        <p>Incorrects: {Object.keys(exam).length - mark}</p>
+        <p>Incorrects: {Object.keys(exam.questions).length - mark}</p>
         <p>Time: {time}</p>
       </section>
       <section className="flex flex-col md:flex-row gap-10 text-center">
