@@ -77,15 +77,15 @@ html {
 }
 
 .correct {
-  border: 3px solid rgb(29, 185, 94);
+  border: 3px solid #06e864;
 }
 
 .incorrect {
-  border: 3px solid rgb(185, 29, 29);
+  border: 3px solid #b91d1d;
 }
 
 .unchecked {
-  border: 3px solid rgb(214, 140, 37);
+  border: 3px solid #d68c25;
 }
 
 .custom-scrollbar {

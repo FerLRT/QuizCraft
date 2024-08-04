@@ -1,4 +1,3 @@
-import { EXAMPLE } from "@/lib/constants";
 import MyButton from "./myButton";
 import { Dispatch, SetStateAction } from "react";
 import removeColors from "@/lib/removeColors";
