@@ -1,7 +1,6 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { Exam } from "@/interfaces/questionInterface";
-import { EXAMPLE } from "@/lib/constants";
 
 interface ExamContextType {
   exam: Exam | null;

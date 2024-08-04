@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-// import Header from "@/components/header";
 import { ExamProvider } from "@/context/ExamContext";
 import { Header } from "@/components/header";
 
