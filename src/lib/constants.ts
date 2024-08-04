@@ -1,6 +1,6 @@
-import lucianImg from "../components/assets/lucian.jpg";
-import sergioImg from "../components/assets/sergio.jpg";
-import fernandoImg from "../components/assets/fernando.jpg";
+import lucianImg from "../components/assets/lucian.svg";
+import sergioImg from "../components/assets/sergio.svg";
+import fernandoImg from "../components/assets/fernando.svg";
 
 import { Exam } from "@/interfaces/questionInterface";
 
@@ -36,7 +36,7 @@ export const TEAM_MEMBERS = [
   {
     name: "Lucian Andrei Farcas",
     role: "Computer Engineer",
-    description: "Description.",
+    description: `I love doing the work nobody sees but everybody uses.`,
     imageUrl: lucianImg,
     linkedIn: "https://www.linkedin.com/in/lucian-farcas/",
     github: "https://github.com/Lucian-UCLM",
@@ -44,7 +44,8 @@ export const TEAM_MEMBERS = [
   {
     name: "Sergio García Muñoz",
     role: "Computer Engineer",
-    description: "Description.",
+    description:
+      "I love front-end development and I am always looking for new challenges.",
     imageUrl: sergioImg,
     linkedIn: "https://www.linkedin.com/in/sergiogarciiam/",
     github: "https://github.com/sergiogarciiam",
@@ -53,7 +54,7 @@ export const TEAM_MEMBERS = [
     name: "Fernando Lorente Calvo",
     role: "Computer Engineer",
     description:
-      "I am passionate about technology and I am always looking for opportunities to learn and expand my knowledge. My goal is to contribute to innovative projects and continue to grow both professionally and personally, learning from every experience and challenge that comes my way.",
+      "I am passionate about technology and I am always looking for opportunities to learn and expand my knowledge.",
     imageUrl: fernandoImg,
     linkedIn: "https://www.linkedin.com/in/fernando-lorente-09aab0274/",
     github: "https://github.com/FerLRT",
