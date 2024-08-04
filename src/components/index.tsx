@@ -41,7 +41,7 @@ export default function Index({
             )}
           </button>
           <div className="flex flex-col w-full h-full overflow-y-auto overflow-x-hidden p-1 custom-scrollbar">
-            {Object.keys(exam).map((key) => (
+            {Object.keys(exam.questions).map((key) => (
               <a
                 data-index={key}
                 href={`#question${key}`}

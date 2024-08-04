@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Exam, Question } from "../interfaces/questionInterface";
 
 const testSchema = z.object({
+  name: z.string().describe("The name of the test. Must be short"),
   questions: z
     .array(
       z.object({
@@ -51,12 +52,18 @@ async function validateTest(test: any) {
   try {
     testSchema.parse(test);
 
-    const exam: Exam = {};
+    const exam: Exam = {
+      name: "",
+      questions: {},
+    };
+
+    exam.name = test.name;
     test.questions.forEach((q: Question, index: number) => {
-      exam[`${index + 1}`] = q;
+      exam.questions[`${index + 1}`] = q;
     });
 
     console.log("Exam is valid:");
+    console.log(exam);
     return exam;
   } catch (e) {
     console.error("Test is invalid:", (e as Error).message);

@@ -1,5 +1,8 @@
 export interface Exam {
-  [key: string]: Question;
+  name?: string;
+  questions: {
+    [key: string]: Question;
+  };
 }
 
 export interface Question {

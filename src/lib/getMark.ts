@@ -11,9 +11,11 @@ export default function getMark(setResults: any, exam: Exam): number {
     const questionIndex = document.querySelector(`[data-index='${key}']`);
 
     answers.forEach((answer) => {
-      const index = exam[key].answers.indexOf(answer.textContent || "");
+      const index = exam.questions[key].answers.indexOf(
+        answer.textContent || ""
+      );
       if (answer.classList.contains("active")) {
-        if (index === exam[key].correct) {
+        if (index === exam.questions[key].correct) {
           mark += 1;
           questionIndex?.classList.add("correct");
           results.push("correct");
@@ -22,7 +24,7 @@ export default function getMark(setResults: any, exam: Exam): number {
           results.push("incorrect");
         }
       } else {
-        index === exam[key].correct
+        index === exam.questions[key].correct
           ? results.push("unchecked")
           : results.push("");
       }

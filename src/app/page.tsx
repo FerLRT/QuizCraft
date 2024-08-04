@@ -8,6 +8,7 @@ import React, { FormEvent, useState } from "react";
 import { generateTest } from "../lib/ia_utils";
 import { useExam } from "@/context/ExamContext";
 import { Loader } from "../components/assets/loader";
+import { saveExamToLocalStorage } from "../lib/saveExam";
 
 export default function Home() {
   const router = useRouter();
@@ -48,6 +49,7 @@ export default function Home() {
       const test = await generateTest(key, extractedText, selectedModel);
       if (test) {
         setExam(test);
+        saveExamToLocalStorage(test);
         router.push("/exam");
       } else {
         alert("Failed to generate test");

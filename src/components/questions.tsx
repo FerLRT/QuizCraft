@@ -46,20 +46,20 @@ export default function Questions({
 
   return (
     <>
-      {Object.keys(exam).map((key) => {
+      {Object.keys(exam.questions).map((key) => {
         return (
           <div key={key}>
             <h2
               className="text-white text-2xl font-bold mb-10 w-[100%] max-w-[650px]"
               id={`question${key}`}
             >
-              {key}. {exam[key].question}
+              {key}. {exam.questions[key].question}
             </h2>
             <div
               className="text-white flex flex-col gap-10 justify-center items-center"
               data-question={key}
             >
-              {exam[key].answers.map((answer) => {
+              {exam.questions[key].answers.map((answer) => {
                 return (
                   <p
                     key={answer}
@@ -80,7 +80,7 @@ export default function Questions({
                 <span className="text-xl bg-white text-neutral-800 p-1 mr-3 rounded-full w-8 h-8 flex items-center justify-center">
                   &#8505;
                 </span>
-                {exam[key].explanation}
+                {exam.questions[key].explanation}
               </p>
             )}
           </div>

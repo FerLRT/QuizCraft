@@ -60,6 +60,10 @@ export default function Exam() {
     <>
       <Index exam={exam} answeredQuestions={answeredQuestions}></Index>
       <div className="flex flex-col gap-20 items-center mt-20 mb-20 mr-[10%] ml-[10%]">
+        <h2 className="text-white font-bold text-4xl border-b-2 p-5">
+          {exam.name}
+        </h2>
+
         <Questions
           exam={exam}
           results={results}
