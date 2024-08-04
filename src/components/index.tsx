@@ -23,7 +23,7 @@ export default function Index({
   return (
     <div>
       <div
-        className={`fixed top-0 right-0 h-full lg:w-[20%] md:w-[60%] w-[80%] z-40 bg-transparent text-white transition-transform ${
+        className={`fixed top-0 right-0 h-full lg:w-[20%] md:w-[60%] w-[80%] z-40 bg-black/50 text-white transition-transform backdrop-blur-sm ${
           isOpen
             ? "translate-x-0"
             : "translate-x-full md:translate-x-[calc(100%-4rem)] lg:translate-x-[calc(100%-4rem)]"

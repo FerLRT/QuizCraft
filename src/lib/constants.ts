@@ -45,7 +45,7 @@ export const TEAM_MEMBERS = [
     name: "Sergio García Muñoz",
     role: "Computer Engineer",
     description:
-      "I love front-end development and I am always looking for new challenges.",
+      "I am committed to open source and contribute to projects that make technology more beneficial for everyone.",
     imageUrl: sergioImg,
     linkedIn: "https://www.linkedin.com/in/sergiogarciiam/",
     github: "https://github.com/sergiogarciiam",
