@@ -18,8 +18,12 @@ export default function History() {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const handleOnClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    setExam(exams[e.currentTarget.id.split("-")[1]]);
-    router.push("/exam");
+    const examId = e.currentTarget.id.split("-")[1];
+    const exam = exams[examId];
+    if (exam) {
+      setExam(exam);
+      router.push("/exam");
+    }
   };
 
   const handleDeleteExam = (examId: string, examName: string) => {
@@ -45,10 +49,13 @@ export default function History() {
     setExamIdToDelete(null);
   };
 
-  const filteredExams = Object.keys(exams).filter((examId) => {
+  // Filtrar exámenes basados en el término de búsqueda
+  const filteredExamIds = Object.keys(exams).filter((examId) => {
     const exam = exams[examId] as Exam;
     return (
-      exam.name && exam.name.toLowerCase().includes(searchTerm.toLowerCase())
+      exam &&
+      exam.name &&
+      exam.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
 
@@ -63,12 +70,14 @@ export default function History() {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <div className="flex flex-col gap-5 items-center flex-grow">
-        {Object.keys(exams).length === 0 ? (
+        {filteredExamIds.length === 0 ? (
           <p className="text-2xl font-bold">
-            You currently have no saved tests
+            {searchTerm
+              ? "No exams found"
+              : "You currently have no saved tests"}
           </p>
         ) : (
-          Object.keys(exams).map((examId) => {
+          filteredExamIds.map((examId) => {
             const exam = exams[examId] as Exam;
             return (
               <div
