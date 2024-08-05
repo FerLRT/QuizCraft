@@ -78,8 +78,8 @@ export default function Questions({
               })}
             </div>
             {isSubmit && (
-              <p className="text-white mt-10 flex items-center justify-center">
-                <span className="text-xl bg-white text-neutral-800 p-1 mr-3 rounded-full w-8 h-8 flex items-center justify-center">
+              <p className="text-white mt-10 flex items-center justify-center w-[100%] max-w-[650px]">
+                <span className="text-xl bg-white text-neutral-800 p-3 mr-3 rounded-full w-8 h-8 flex items-center justify-center">
                   &#8505;
                 </span>
                 {exam.questions[key].explanation}
