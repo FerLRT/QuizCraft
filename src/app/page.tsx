@@ -10,6 +10,8 @@ import { generateTest } from "../lib/ia_utils";
 import { useExam } from "@/context/ExamContext";
 import { Loader } from "../components/assets/loader";
 import { useLocalStorage } from "../lib/examLocalStorage";
+import AlertMessage from "@/components/alertMessage";
+import { set } from "zod";
 
 export default function Home() {
   const router = useRouter();
@@ -19,6 +21,10 @@ export default function Home() {
   const [key, setKey] = useState<string>("");
   const [selectedModel, setSelectedModel] = useState<string>("gpt-4-turbo");
   const [loading, setLoading] = useState<boolean>(false);
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+
+  const [error, setError] = useState<string | null>("");
+  const [message, setMessage] = useState<string | null>("");
 
   const { addExam } = useLocalStorage();
 
@@ -29,6 +35,10 @@ export default function Home() {
       setKey(key);
     }
   }, []);
+
+  const countWords = (text: string): number => {
+    return text.trim().split(/\s+/).length;
+  };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -49,25 +59,45 @@ export default function Home() {
     e: FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
+
     if (!file) {
-      alert("Please upload a file.");
+      setError("Error");
+      setMessage("Please add a file");
+      setShowAlert(true);
       return;
     }
 
     setLoading(true);
+    setShowAlert(false);
     try {
       const extractedText = await extractText(file);
+      const wordCount = countWords(extractedText);
+
+      if (wordCount > 3000) {
+        setError("Error");
+        setMessage(
+          "The text is too long, please use a text with less than 3000 words"
+        );
+        setShowAlert(true);
+        return;
+      }
+
       const test = await generateTest(key, extractedText, selectedModel);
       if (test) {
         setExam(test);
         addExam(test);
         router.push("/exam");
       } else {
-        alert("Failed to generate test");
+        setError("Error");
+        setMessage("Failed to generate test");
+        setShowAlert(true);
       }
     } catch (error) {
-      console.error("Error extracting text:", error);
-      alert("Error extracting text");
+      setError("Error");
+      setMessage(
+        "Something went wrong. Be sure to enter a valid API KEY and try again."
+      );
+      setShowAlert(true);
     } finally {
       setLoading(false);
     }
@@ -122,6 +152,18 @@ export default function Home() {
           </div>
         </form>
       </div>
+
+      {showAlert && (
+        <div className="fixed top-0 left-0 right-0 p-4 z-50">
+          <AlertMessage
+            type={error || ""}
+            message={message || ""}
+            onClose={() => setShowAlert(false)}
+            duration={5000}
+          />
+        </div>
+      )}
+
       <a
         href="/about"
         className="flex justify-center text-white text-center mb-4 hover:underline"
