@@ -2,10 +2,7 @@ import { AppLogoName } from "./assets/headbar_ico";
 
 export function Header() {
   return (
-    <a
-      href="/"
-      className="text-4xl font-bold text-white mt-5 sm:ml-5 text-center sm:text-left"
-    >
+    <a href="/" className="mt-5 flex justify-center md:justify-start md:ml-5">
       <AppLogoName></AppLogoName>
     </a>
   );
