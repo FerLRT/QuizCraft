@@ -49,7 +49,7 @@ export default function History() {
     setExamIdToDelete(null);
   };
 
-  // Filtrar exámenes basados en el término de búsqueda
+  // Filter exams based on search term
   const filteredExamIds = Object.keys(exams).filter((examId) => {
     const exam = exams[examId] as Exam;
     return (

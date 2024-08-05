@@ -11,7 +11,6 @@ import { useExam } from "@/context/ExamContext";
 import { Loader } from "../components/assets/loader";
 import { useLocalStorage } from "../lib/examLocalStorage";
 import AlertMessage from "@/components/alertMessage";
-import { set } from "zod";
 
 export default function Home() {
   const router = useRouter();
