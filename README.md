@@ -21,6 +21,10 @@ A React application to create exams from different file types using AI, with loc
 - TailwindCSS
 - Vercel AI SDK
 
+## Demo
+
+![Watch the demo](./src/components/assets/demo.gif)
+
 ## Authors
 
 - [Lucian Andrei](https://github.com/Lucian-UCLM)
