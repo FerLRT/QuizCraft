@@ -109,7 +109,7 @@ export function FileLoader({
             drop
           </p>
           <p className="text-xs text-white dark:text-gray-400 text-center max-w-xs mx-auto">
-            PDF, TXT, DOCX, MD or ODT files only (max 5MB)
+            PDF, TXT, DOCX, MD or ODT files only (max 3000 words)
           </p>
           <p className="mt-2 text-sm text-white dark:text-gray-300">
             {fileName ? (

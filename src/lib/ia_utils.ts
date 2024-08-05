@@ -61,9 +61,6 @@ async function validateTest(test: any) {
     test.questions.forEach((q: Question, index: number) => {
       exam.questions[`${index + 1}`] = q;
     });
-
-    console.log("Exam is valid:");
-    console.log(exam);
     return exam;
   } catch (e) {
     console.error("Test is invalid:", (e as Error).message);
