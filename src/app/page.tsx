@@ -109,7 +109,15 @@ export default function Home() {
                 </span>
               </section>
             ) : (
-              <MyButton>Go to exam!</MyButton>
+              <section className="flex flex-col gap-5 items-center">
+                <MyButton>Go to exam!</MyButton>
+                <a
+                  href="/history"
+                  className="text-white font-bold cursor-pointer mt-5 hover:underline"
+                >
+                  History
+                </a>
+              </section>
             )}
           </div>
         </form>
