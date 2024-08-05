@@ -16,7 +16,7 @@ export default function About() {
             className="border-t-2 border-b-2 p-6 shadow-xl flex flex-col "
           >
             <Image
-              className="rounded-full mx-auto mb-4"
+              className="rounded-full mx-auto mb-4 shadow shadow-white"
               width={150}
               height={150}
               src={member.imageUrl.src}
